@@ -7,6 +7,7 @@ import SocialIcons from "./SocialIcons";
 function OwnerView({ mosaic, connections, onDeleteConnection, canDelete = true }) {
   const [activeConnection, setActiveConnection] = useState(null);
   const [toast, setToast] = useState("");
+  const guestUrl = `${window.location.origin}/mosaic/${mosaic.id}?mode=guest`;
 
   const collageCountLabel = useMemo(() => {
     const count = connections.length;
@@ -30,7 +31,7 @@ function OwnerView({ mosaic, connections, onDeleteConnection, canDelete = true }
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(guestUrl);
       setToast("Link copied. Invite someone new.");
       setTimeout(() => setToast(""), 1800);
     } catch {
